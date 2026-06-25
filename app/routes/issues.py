@@ -6,6 +6,7 @@ from app.services.db import (
     read_all, find_one, insert_one, update_one, delete_one,
     find_many, generate_issue_id
 )
+from app.services.ai_service import DEPARTMENTS, SLA_DAYS
 import base64
 
 router = APIRouter()
@@ -22,6 +23,8 @@ async def submit_issue(
     lat:         str = Form(""),
     lon:         str = Form(""),
     ward:        str = Form(""),
+    category:    str = Form("Other"),
+    severity:    str = Form("MEDIUM"),
     image: Optional[UploadFile] = File(None),
     authorization: Optional[str] = Header(None),
 ):
@@ -39,36 +42,60 @@ async def submit_issue(
     else:
         ai_result = ai_service.analyze_text(description)
 
+    # User ki category aur severity use karo
+    final_category = category if category and category != "Other" else ai_result.get("detected_category", "Other")
+    final_severity = severity if severity else ai_result.get("severity", "MEDIUM")
+
+    department = DEPARTMENTS.get(final_category, "Municipal Corporation")
+    sla_days = SLA_DAYS.get(final_severity, 7)
+
+    resolution_plan = ai_result.get("resolution_plan", [
+        "Site inspection by concerned department",
+        "Resource allocation and team deployment",
+        "Repair/fix work to be carried out",
+        "Quality check and documentation",
+        "Close issue and notify reporter"
+    ])
+    immediate_action = ai_result.get("immediate_action", "Flag for immediate inspection")
+    estimated_days = ai_result.get("estimated_days", sla_days)
+    risk_description = ai_result.get("risk_description", "May cause public inconvenience if not addressed promptly.")
+    severity_reason = ai_result.get("severity_reason", "Based on reported description.")
+
     issue_id = generate_issue_id()
     issue = insert_one("issues", {
-        "id":            issue_id,
-        "title":         ai_result.get("detected_category", "Civic Issue"),
-        "description":   description,
-        "category":      ai_result.get("detected_category", "Other"),
-        "severity":      ai_result.get("severity", "MEDIUM"),
-        "status":        "PENDING_REVIEW",
-        "location":      location,
-        "lat":           lat,
-        "lon":           lon,
-        "ward":          ward,
-        "reporter_id":   user["id"],
-        "reporter_name": user["name"],
-        "department":    ai_result.get("department", "Municipal Corporation"),
-        "ai_analysis":   ai_result,
-        "ai_confidence": ai_result.get("confidence", 0.5),
-        "priority_score":ai_result.get("priority_score", 5),
-        "upvotes":       0,
-        "upvoted_by":    [],
-        "image_b64":     image_b64,
-        "duplicate_of":  None,
-        "sla_days":      ai_result.get("sla_days", 7),
-        "resolved_at":   None,
+        "id":               issue_id,
+        "title":            final_category,
+        "description":      description,
+        "category":         final_category,
+        "severity":         final_severity,
+        "status":           "PENDING_REVIEW",
+        "location":         location,
+        "lat":              lat,
+        "lon":              lon,
+        "ward":             ward,
+        "reporter_id":      user["id"],
+        "reporter_name":    user["name"],
+        "department":       department,
+        "ai_analysis":      ai_result,
+        "ai_confidence":    ai_result.get("confidence", 0.5),
+        "priority_score":   ai_result.get("priority_score", 5),
+        "upvotes":          0,
+        "upvoted_by":       [],
+        "image_b64":        image_b64,
+        "duplicate_of":     None,
+        "sla_days":         sla_days,
+        "resolved_at":      None,
+        "resolution_plan":  resolution_plan,
+        "immediate_action": immediate_action,
+        "estimated_days":   estimated_days,
+        "risk_description": risk_description,
+        "severity_reason":  severity_reason,
     })
 
     xp = gamification_service.award_xp(user["id"], "submit_issue", issue_id)
     if image_b64:
         gamification_service.award_xp(user["id"], "photo_evidence", issue_id)
-    if ai_result.get("severity") == "CRITICAL":
+    if final_severity == "CRITICAL":
         gamification_service.award_xp(user["id"], "critical_report", issue_id)
 
     return {"issue": issue, "xp": xp}
