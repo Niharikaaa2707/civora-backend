@@ -1,0 +1,18 @@
+[
+  {
+    "name": "NIHARIKA FAGERIA",
+    "email": "fagerianiku27@gmail.com",
+    "phone": "",
+    "password": "$2b$12$DOCNOvcWkTAP7M7vU57cUOnW5OzSVkeepWFSq7EEcYWNULhvK3pGe",
+    "xp_points": 56,
+    "tier": "Newcomer",
+    "badges": [
+      "first_report"
+    ],
+    "ward": "",
+    "role": "citizen",
+    "id": "3cbf89ab-733a-42cf-b38c-f8783e3bb768",
+    "created_at": "2026-06-25T05:45:25.243621",
+    "updated_at": "2026-06-25T06:48:07.368961"
+  }
+]

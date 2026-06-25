@@ -1,0 +1,57 @@
+[
+  {
+    "id": "m1",
+    "title": "Pothole Hunter",
+    "description": "Report 3 road issues this week",
+    "target_action": "report",
+    "category": "Pothole",
+    "target_count": 3,
+    "xp_reward": 100,
+    "badge_icon": "\ud83d\udee3\ufe0f",
+    "active": true
+  },
+  {
+    "id": "m2",
+    "title": "Light Up the City",
+    "description": "Report 5 broken streetlights in your area",
+    "target_action": "report",
+    "category": "Streetlight",
+    "target_count": 5,
+    "xp_reward": 150,
+    "badge_icon": "\ud83d\udca1",
+    "active": true
+  },
+  {
+    "id": "m3",
+    "title": "Clean Sweep",
+    "description": "Validate 10 waste management issues",
+    "target_action": "validate",
+    "category": "Garbage",
+    "target_count": 10,
+    "xp_reward": 80,
+    "badge_icon": "\ud83e\uddf9",
+    "active": true
+  },
+  {
+    "id": "m4",
+    "title": "Water Watch",
+    "description": "Report 2 water leakage issues",
+    "target_action": "report",
+    "category": "Water",
+    "target_count": 2,
+    "xp_reward": 120,
+    "badge_icon": "\ud83d\udca7",
+    "active": true
+  },
+  {
+    "id": "m5",
+    "title": "First Responder",
+    "description": "Be first to report a CRITICAL issue",
+    "target_action": "critical",
+    "category": "Any",
+    "target_count": 1,
+    "xp_reward": 200,
+    "badge_icon": "\ud83d\udea8",
+    "active": true
+  }
+]

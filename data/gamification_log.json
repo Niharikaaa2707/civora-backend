@@ -1,0 +1,58 @@
+[
+  {
+    "user_id": "3cbf89ab-733a-42cf-b38c-f8783e3bb768",
+    "action": "submit_issue",
+    "xp_awarded": 10,
+    "issue_id": "CIV-0001",
+    "id": "13e3a9b5-fa78-49dd-bd78-7237dc4af9ef",
+    "created_at": "2026-06-25T06:16:33.905513"
+  },
+  {
+    "user_id": "3cbf89ab-733a-42cf-b38c-f8783e3bb768",
+    "action": "photo_evidence",
+    "xp_awarded": 5,
+    "issue_id": "CIV-0001",
+    "id": "75b3c182-0e56-4c58-b015-4f91c8193df3",
+    "created_at": "2026-06-25T06:16:33.910460"
+  },
+  {
+    "user_id": "3cbf89ab-733a-42cf-b38c-f8783e3bb768",
+    "action": "validate_issue",
+    "xp_awarded": 3,
+    "issue_id": "CIV-0001",
+    "id": "64c9fa17-a512-424c-a6a6-7229f836b3c8",
+    "created_at": "2026-06-25T06:18:41.578889"
+  },
+  {
+    "user_id": "3cbf89ab-733a-42cf-b38c-f8783e3bb768",
+    "action": "submit_issue",
+    "xp_awarded": 10,
+    "issue_id": "CIV-0002",
+    "id": "72b04221-30e9-44ba-86d7-7a050ae10e87",
+    "created_at": "2026-06-25T06:35:02.132089"
+  },
+  {
+    "user_id": "3cbf89ab-733a-42cf-b38c-f8783e3bb768",
+    "action": "photo_evidence",
+    "xp_awarded": 5,
+    "issue_id": "CIV-0002",
+    "id": "78a2e9be-8e1b-41b3-b605-9f660773ea4c",
+    "created_at": "2026-06-25T06:35:02.135138"
+  },
+  {
+    "user_id": "3cbf89ab-733a-42cf-b38c-f8783e3bb768",
+    "action": "validate_issue",
+    "xp_awarded": 3,
+    "issue_id": "CIV-0002",
+    "id": "3da12457-24f6-4ebb-8e80-c54a3c0be8c6",
+    "created_at": "2026-06-25T06:36:34.704901"
+  },
+  {
+    "user_id": "3cbf89ab-733a-42cf-b38c-f8783e3bb768",
+    "action": "issue_resolved",
+    "xp_awarded": 20,
+    "issue_id": "CIV-0002",
+    "id": "1ce95b77-8013-472c-939f-e036c1234beb",
+    "created_at": "2026-06-25T06:48:07.374338"
+  }
+]
